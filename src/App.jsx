@@ -1,8 +1,5 @@
-import "./styles/App.css";
-import { HelloWorld } from "./components/HelloWorld";
-
 export function App() {
-  return <HelloWorld name={"World"}></HelloWorld>;
+  return <h1>HomePage</h1>;
 }
 
 export default App;
