@@ -7,13 +7,17 @@ function Homepage() {
     <div className={style.container}>
       <h1>Homepage</h1>
       <div className={style.descriptionWrapper}>
-        <p>
+        <p data-testid='homepageDescription'>
           Lorem ipsum dolor sit amet consectetur adipiscing elit. Amet
           consectetur adipiscing elit quisque faucibus ex sapien. Quisque
           faucibus ex sapien vitae pellentesque sem placerat. Vitae pellentesque
           sem placerat in id cursus mi.
         </p>
-        <img src={imageSrc} alt='homepage HomePageHeroImage' />
+        <img
+          data-testid='heroImage'
+          src={imageSrc}
+          alt='homepage HomePageHeroImage'
+        />
         {/* <img style={style.homepagePic} /> */}
       </div>
 
@@ -21,4 +25,5 @@ function Homepage() {
     </div>
   );
 }
+
 export default Homepage;
