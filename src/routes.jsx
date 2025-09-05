@@ -1,8 +1,8 @@
 import App from "./App";
-import Checkout from "./pages/Checkout";
-import ErrorPage from "./pages/ErrorPage";
-import Homepage from "./pages/Homepage";
-import Products from "./pages/Products";
+import Checkout from "./pages/Checkout/Checkout";
+import ErrorPage from "./pages/ErrorPage/ErrorPage";
+import Homepage from "./pages/Homepage/Homepage";
+import Products from "./pages/Products/Products";
 
 const routes = [
   {

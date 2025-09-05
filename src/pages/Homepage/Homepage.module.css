@@ -1,0 +1,20 @@
+@import url(../../styles/reset.css);
+
+.container {
+  display: grid;
+  place-content: center;
+  place-items: center;
+}
+
+.descriptionWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.descriptionWrapper > * {
+  flex: 1;
+}
+.homepagePic {
+  height: 400px;
+}

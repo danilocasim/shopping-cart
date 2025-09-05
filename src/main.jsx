@@ -3,9 +3,11 @@ import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import routes from "./routes.jsx";
 
+import "./styles/App.css";
+
 const router = createBrowserRouter(routes);
 
-createRoot(document.querySelector("main")).render(
+createRoot(document.querySelector("#root")).render(
   <StrictMode>
     <RouterProvider router={router} />
   </StrictMode>
