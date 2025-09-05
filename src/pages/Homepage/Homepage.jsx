@@ -5,6 +5,7 @@ import imageSrc from "../../assets/HomePageHeroImage.png";
 function Homepage() {
   return (
     <div className={style.container}>
+      <h1>Homepage</h1>
       <div className={style.descriptionWrapper}>
         <p>
           Lorem ipsum dolor sit amet consectetur adipiscing elit. Amet

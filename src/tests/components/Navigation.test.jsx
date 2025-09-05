@@ -2,6 +2,7 @@ import { describe, it, expect } from "vitest";
 import { RouterProvider, createMemoryRouter } from "react-router";
 import { render, screen } from "@testing-library/react";
 import routes from "../../routes.jsx";
+import { userEvent } from "@testing-library/user-event";
 
 describe("Navigation Component", () => {
   it("renders the content correctly", () => {
@@ -17,5 +18,30 @@ describe("Navigation Component", () => {
 
     expect(screen.getByRole("link", { name: "Products" })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Checkout" })).toBeInTheDocument();
+  });
+
+  it("should be clickable, the links", async () => {
+    const user = userEvent.setup();
+
+    const router = createMemoryRouter(routes, {
+      initialEntries: ["/"],
+    });
+
+    render(<RouterProvider router={router}></RouterProvider>);
+
+    const productsLink = screen.getByRole("link", { name: "Products" });
+    const checkoutLinks = screen.getByRole("link", { name: "Checkout" });
+
+    await user.click(productsLink);
+
+    expect(
+      screen.getByRole("heading", { name: "Products" })
+    ).toBeInTheDocument();
+
+    await user.click(checkoutLinks);
+
+    expect(
+      screen.getByRole("heading", { name: "Checkout" })
+    ).toBeInTheDocument();
   });
 });
