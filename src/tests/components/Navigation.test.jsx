@@ -6,8 +6,7 @@ import routes from "../../routes.jsx";
 describe("Navigation Component", () => {
   it("renders the content correctly", () => {
     const router = createMemoryRouter(routes, {
-      initialEntries: ["/", "/checkout", "/products"],
-      initialIndex: 0,
+      initialEntries: ["/"],
     });
 
     render(<RouterProvider router={router}></RouterProvider>);
