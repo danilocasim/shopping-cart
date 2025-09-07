@@ -1,6 +1,10 @@
 import { describe, it, expect } from "vitest";
 import { RouterProvider, createMemoryRouter } from "react-router";
-import { render, screen } from "@testing-library/react";
+import {
+  render,
+  screen,
+  waitForElementToBeRemoved,
+} from "@testing-library/react";
 import routes from "../../routes.jsx";
 import { userEvent } from "@testing-library/user-event";
 
@@ -30,8 +34,8 @@ describe("Homepage component", () => {
 
     await user.click(shopNowLink);
 
-    expect(
-      screen.getByRole("heading", { name: "Products" })
-    ).toBeInTheDocument();
+    await waitForElementToBeRemoved(screen.getByText("Loading..."));
+
+    expect(screen.getByText("Mens Cotton Jacket")).toBeInTheDocument();
   });
 });
