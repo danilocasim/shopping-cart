@@ -2,13 +2,3 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 }
-
-.productWrapper {
-  display: grid;
-  place-items: center;
-}
-
-.productImage {
-  height: 100px;
-  width: 100px;
-}
