@@ -1,0 +1,18 @@
+.productImage {
+  height: 100px;
+  width: 100px;
+}
+.productWrapper {
+  display: grid;
+  place-items: center;
+}
+
+.buttonWrapper {
+  display: flex;
+  width: 100px;
+}
+
+input {
+  width: 30px;
+  text-align: center;
+}
