@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { RouterProvider, createMemoryRouter } from "react-router";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import routes from "../../routes.jsx";
 import { userEvent } from "@testing-library/user-event";
 
@@ -34,9 +34,14 @@ describe("Navigation Component", () => {
 
     await user.click(productsLink);
 
-    expect(
-      screen.getByRole("heading", { name: "Products" })
-    ).toBeInTheDocument();
+    await waitFor(
+      () => expect(screen.queryByText("Loading...")).not.toBeInTheDocument(),
+      {
+        timeout: 3000,
+      }
+    );
+
+    expect(screen.getByText("Mens Cotton Jacket")).toBeInTheDocument();
 
     await user.click(checkoutLinks);
 
