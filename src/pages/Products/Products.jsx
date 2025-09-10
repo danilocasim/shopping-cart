@@ -70,19 +70,23 @@ function Products() {
   if (error) return <p>Error</p>;
   return (
     <div className={style.products}>
-      <h1>Products</h1>
       {productsData &&
-        productsData.map((data) => {
+        productsData.map((data, index) => {
           return (
-            <div className={style.productWrapper} key={data.id}>
-              <img
-                className={style.productImage}
-                src={data.image}
-                alt={data.title}
+            //make quantity get change in real time per product
+            <Fragment key={data.id}>
+              <Product
+                onChange={(e) => {
+                  setProductQuantity(Number(e.target.value), index);
+                }}
+                onClick={() => {
+                  addToCart(productsData[index]);
+                }}
+                data={data}
+                increment={() => increment(index)}
+                decrement={() => decrement(index)}
               />
-
-              <p>{data.title}</p>
-            </div>
+            </Fragment>
           );
         })}
     </div>
