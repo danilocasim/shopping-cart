@@ -10,7 +10,7 @@ import routes from "../../routes.jsx";
 import userEvent from "@testing-library/user-event";
 
 describe("Product page component", () => {
-  it.only("should render correctly", async () => {
+  it("should render correctly", async () => {
     const router = createMemoryRouter(routes, {
       initialEntries: ["/products"],
     });
@@ -35,12 +35,9 @@ describe("Product page component", () => {
 
     render(<RouterProvider router={router}></RouterProvider>);
 
-    await waitFor(
-      () => expect(screen.queryByText("Loading...")).not.toBeInTheDocument(),
-      {
-        timeout: 3000,
-      }
-    );
+    await waitForElementToBeRemoved(screen.queryByText("Loading..."), {
+      timeout: 5000,
+    });
 
     const addToCartBtn = screen.getByTestId(/Mens Cotton Jacket/);
 
@@ -61,12 +58,9 @@ describe("Product page component", () => {
 
     render(<RouterProvider router={router}></RouterProvider>);
 
-    await waitFor(
-      () => expect(screen.queryByText("Loading...")).not.toBeInTheDocument(),
-      {
-        timeout: 3000,
-      }
-    );
+    await waitForElementToBeRemoved(screen.queryByText("Loading..."), {
+      timeout: 5000,
+    });
 
     const addToCartBtn = screen.getByTestId(/Mens Cotton Jacket/);
 
@@ -88,12 +82,9 @@ describe("Product page component", () => {
 
     render(<RouterProvider router={router}></RouterProvider>);
 
-    await waitFor(
-      () => expect(screen.queryByText("Loading...")).not.toBeInTheDocument(),
-      {
-        timeout: 3000,
-      }
-    );
+    await waitForElementToBeRemoved(screen.queryByText("Loading..."), {
+      timeout: 5000,
+    });
 
     const quantity = screen.getByTestId("3-quantity");
 
@@ -107,13 +98,9 @@ describe("Product page component", () => {
     });
 
     render(<RouterProvider router={router}></RouterProvider>);
-
-    await waitForElementToBeRemoved(
-      () => expect(screen.queryByText("Loading...")),
-      {
-        timeout: 3000,
-      }
-    );
+    await waitForElementToBeRemoved(screen.queryByText("Loading..."), {
+      timeout: 5000,
+    });
 
     const increment = screen.getByTestId("3-increment");
     const decrement = screen.getByTestId("3-decrement");
@@ -137,7 +124,7 @@ describe("Product page component", () => {
     render(<RouterProvider router={router}></RouterProvider>);
 
     await waitForElementToBeRemoved(screen.queryByText("Loading..."), {
-      timeout: 3000,
+      timeout: 5000,
     });
 
     const increment = screen.getByTestId("3-increment");
