@@ -1,12 +1,18 @@
 import { describe, it, expect } from "vitest";
 import { RouterProvider, createMemoryRouter } from "react-router";
-import {
-  render,
-  screen,
-  waitForElementToBeRemoved,
-} from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import routes from "../../routes.jsx";
 import userEvent from "@testing-library/user-event";
+import { products } from "../products.js";
+import { vi } from "vitest";
+
+vi.mock("../../components/hooks/useStoreAPI.jsx", () => {
+  return {
+    useStoreAPI: vi.fn(() => {
+      return [products, false, false];
+    }),
+  };
+});
 
 describe("Product page component", () => {
   it("should render correctly", async () => {
@@ -16,13 +22,9 @@ describe("Product page component", () => {
 
     render(<RouterProvider router={router}></RouterProvider>);
 
-    await waitForElementToBeRemoved(screen.queryByText("Loading..."), {
-      timeout: 5000,
-    });
-
-    expect(screen.getAllByRole("img").length).toBe(20);
+    expect(screen.getAllByRole("img").length).toBe(3);
     expect(screen.getAllByRole("button", { name: "Add to Cart" }).length).toBe(
-      20
+      3
     );
   });
 
@@ -33,10 +35,6 @@ describe("Product page component", () => {
     });
 
     render(<RouterProvider router={router}></RouterProvider>);
-
-    await waitForElementToBeRemoved(screen.queryByText("Loading..."), {
-      timeout: 5000,
-    });
 
     const addToCartBtn = screen.getByTestId(/Mens Cotton Jacket/);
 
@@ -56,10 +54,6 @@ describe("Product page component", () => {
     });
 
     render(<RouterProvider router={router}></RouterProvider>);
-
-    await waitForElementToBeRemoved(screen.queryByText("Loading..."), {
-      timeout: 5000,
-    });
 
     const addToCartBtn = screen.getByTestId(/Mens Cotton Jacket/);
 
@@ -81,10 +75,6 @@ describe("Product page component", () => {
 
     render(<RouterProvider router={router}></RouterProvider>);
 
-    await waitForElementToBeRemoved(screen.queryByText("Loading..."), {
-      timeout: 5000,
-    });
-
     const quantity = screen.getByTestId("3-quantity");
 
     expect(quantity.value).toBe("1");
@@ -97,9 +87,6 @@ describe("Product page component", () => {
     });
 
     render(<RouterProvider router={router}></RouterProvider>);
-    await waitForElementToBeRemoved(screen.queryByText("Loading..."), {
-      timeout: 5000,
-    });
 
     const increment = screen.getByTestId("3-increment");
     const decrement = screen.getByTestId("3-decrement");
@@ -121,10 +108,6 @@ describe("Product page component", () => {
     });
 
     render(<RouterProvider router={router}></RouterProvider>);
-
-    await waitForElementToBeRemoved(screen.queryByText("Loading..."), {
-      timeout: 5000,
-    });
 
     const increment = screen.getByTestId("3-increment");
 
