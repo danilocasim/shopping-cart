@@ -16,12 +16,7 @@ function useStoreAPI() {
           })
         ).json();
 
-        const storeDataWithQuantities = storeData.map((product) => ({
-          ...product,
-          quantity: (product.quantity = 1),
-        }));
-
-        setData(storeDataWithQuantities);
+        setData(storeData);
         setError(false);
       } catch (error) {
         if (error.name === "AbortError") {
@@ -37,7 +32,7 @@ function useStoreAPI() {
     return () => controller.abort();
   }, []);
 
-  return [data, setData, loading, error];
+  return [data, loading, error];
 }
 
 export { useStoreAPI };
