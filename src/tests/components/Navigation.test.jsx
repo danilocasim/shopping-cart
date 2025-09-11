@@ -1,12 +1,20 @@
 import { describe, it, expect } from "vitest";
 import { RouterProvider, createMemoryRouter } from "react-router";
-import {
-  render,
-  screen,
-  waitForElementToBeRemoved,
-} from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import routes from "../../routes.jsx";
 import { userEvent } from "@testing-library/user-event";
+import { vi } from "vitest";
+import { products } from "../products.js";
+
+vi.mock("../../components/hooks/useStoreAPI.jsx", async (importOriginal) => {
+  const importedMod = await importOriginal();
+  return {
+    ...importedMod,
+    useStoreAPI: vi.fn(() => {
+      return [products, false, false];
+    }),
+  };
+});
 
 describe("Navigation Component", () => {
   it("renders the content correctly", () => {
@@ -37,10 +45,6 @@ describe("Navigation Component", () => {
     const checkoutLinks = screen.getByRole("link", { name: "Checkout" });
 
     await user.click(productsLink);
-
-    await waitForElementToBeRemoved(screen.queryByText("Loading..."), {
-      timeout: 5000,
-    });
 
     expect(screen.getByText("Mens Cotton Jacket")).toBeInTheDocument();
 
