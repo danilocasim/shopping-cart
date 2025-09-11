@@ -1,10 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { RouterProvider, createMemoryRouter } from "react-router";
-import {
-  render,
-  screen,
-  waitForElementToBeRemoved,
-} from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import routes from "../../routes.jsx";
 import { userEvent } from "@testing-library/user-event";
 
@@ -34,8 +30,12 @@ describe("Homepage component", () => {
 
     await user.click(shopNowLink);
 
-    await waitForElementToBeRemoved(screen.getByText("Loading..."));
-
-    expect(screen.getByText("Mens Cotton Jacket")).toBeInTheDocument();
+    await waitFor(
+      () => expect(screen.queryByText("Loading...")).not.toBeInTheDocument(),
+      {
+        timeout: 3000,
+      }
+    );
+    expect(screen.getByAltText(/Mens Cotton Jacket/i)).toBeInTheDocument();
   });
 });
