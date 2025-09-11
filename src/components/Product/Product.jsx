@@ -12,7 +12,7 @@ function Product({ data, onClick, onChange, increment, decrement }) {
         </button>
         <input
           min={1}
-          max={999}
+          maxLength={3}
           value={data.quantity}
           data-testid={data.id + "-quantity"}
           type='tel'
