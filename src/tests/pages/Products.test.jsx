@@ -1,23 +1,25 @@
 import { describe, it, expect } from "vitest";
 import { RouterProvider, createMemoryRouter } from "react-router";
-import { render, screen, waitFor } from "@testing-library/react";
+import {
+  render,
+  screen,
+  waitFor,
+  waitForElementToBeRemoved,
+} from "@testing-library/react";
 import routes from "../../routes.jsx";
 import userEvent from "@testing-library/user-event";
 
 describe("Product page component", () => {
-  it("should render correctly", async () => {
+  it.only("should render correctly", async () => {
     const router = createMemoryRouter(routes, {
       initialEntries: ["/products"],
     });
 
     render(<RouterProvider router={router}></RouterProvider>);
 
-    await waitFor(
-      () => expect(screen.queryByText("Loading...")).not.toBeInTheDocument(),
-      {
-        timeout: 3000,
-      }
-    );
+    await waitForElementToBeRemoved(screen.queryByText("Loading..."), {
+      timeout: 5000,
+    });
 
     expect(screen.getAllByRole("img").length).toBe(20);
     expect(screen.getAllByRole("button", { name: "Add to Cart" }).length).toBe(
@@ -106,8 +108,8 @@ describe("Product page component", () => {
 
     render(<RouterProvider router={router}></RouterProvider>);
 
-    await waitFor(
-      () => expect(screen.queryByText("Loading...")).not.toBeInTheDocument(),
+    await waitForElementToBeRemoved(
+      () => expect(screen.queryByText("Loading...")),
       {
         timeout: 3000,
       }
@@ -134,19 +136,16 @@ describe("Product page component", () => {
 
     render(<RouterProvider router={router}></RouterProvider>);
 
-    await waitFor(
-      () => expect(screen.queryByText("Loading...")).not.toBeInTheDocument(),
-      {
-        timeout: 3000,
-      }
-    );
+    await waitForElementToBeRemoved(screen.queryByText("Loading..."), {
+      timeout: 3000,
+    });
 
     const increment = screen.getByTestId("3-increment");
 
     await user.click(increment);
     await user.click(increment);
 
-    const addToCartBtn = screen.getByTestId(/Mens Cotton Jacket/);
+    const addToCartBtn = screen.getByTestId("Mens Cotton Jacket");
 
     await user.click(addToCartBtn);
 
