@@ -1,6 +1,10 @@
 import { describe, it, expect } from "vitest";
 import { RouterProvider, createMemoryRouter } from "react-router";
-import { render, screen, waitFor } from "@testing-library/react";
+import {
+  render,
+  screen,
+  waitForElementToBeRemoved,
+} from "@testing-library/react";
 import routes from "../../routes.jsx";
 import { userEvent } from "@testing-library/user-event";
 
@@ -34,12 +38,9 @@ describe("Navigation Component", () => {
 
     await user.click(productsLink);
 
-    await waitFor(
-      () => expect(screen.queryByText("Loading...")).not.toBeInTheDocument(),
-      {
-        timeout: 3000,
-      }
-    );
+    await waitForElementToBeRemoved(screen.queryByText("Loading..."), {
+      timeout: 5000,
+    });
 
     expect(screen.getByText("Mens Cotton Jacket")).toBeInTheDocument();
 

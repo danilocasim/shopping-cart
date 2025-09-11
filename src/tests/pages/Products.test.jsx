@@ -3,7 +3,6 @@ import { RouterProvider, createMemoryRouter } from "react-router";
 import {
   render,
   screen,
-  waitFor,
   waitForElementToBeRemoved,
 } from "@testing-library/react";
 import routes from "../../routes.jsx";
