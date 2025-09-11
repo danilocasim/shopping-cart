@@ -3,84 +3,85 @@ import Product from "../../components/Product/Product";
 import { Fragment } from "react";
 import style from "./Products.module.css";
 import { useOutletContext } from "react-router";
+import { useProductsWithQuantity } from "../../components/hooks/productsWithQuantity";
 
 function Products() {
-  const [productsData, setProductsData, loading, error] = useStoreAPI();
+  const [productsData, loading, error] = useStoreAPI();
   const [checkoutItems, setCheckoutItems] = useOutletContext();
+  const [allProducts, setAllProducts] = useProductsWithQuantity(productsData);
 
   function addToCart(data) {
+    const copyData = { ...data };
     const newCheckoutItems = [...checkoutItems];
 
     const isProductExist = newCheckoutItems.some((product) => {
-      if (product) return product.id === data.id;
+      if (product) return product.id === copyData.id;
     });
 
     if (isProductExist) {
       const index = newCheckoutItems.findIndex(
-        (product) => product.id === data.id
+        (product) => product.id === copyData.id
       );
       newCheckoutItems.map((product, productIndex) => {
         if (productIndex === index) {
-          return (product.quantity += data.quantity);
+          return (product.quantity += copyData.quantity);
         }
       });
 
       setCheckoutItems(newCheckoutItems);
 
-      return;
+      return resetProductsQuantity();
     }
 
-    newCheckoutItems.push(data);
+    newCheckoutItems.push(copyData);
 
     setCheckoutItems(newCheckoutItems);
+    resetProductsQuantity();
   }
 
   function setProductQuantity(value, index) {
-    const updatedQuanties = [...productsData];
+    const updatedQuanties = [...allProducts];
     updatedQuanties[index].quantity = value;
-    setProductsData(updatedQuanties);
+    setAllProducts(updatedQuanties);
   }
 
   function resetProductsQuantity() {
-    const resetProductsQuantity = productsData.map((product) => ({
+    const resetProductsQuantity = allProducts.map((product) => ({
       ...product,
       quantity: (product.quantity = 1),
     }));
 
-    setProductsData(resetProductsQuantity);
+    setAllProducts(resetProductsQuantity);
   }
 
   function increment(index) {
-    const newProductsData = [...productsData];
+    const newProductsData = [...allProducts];
     newProductsData[index].quantity += 1;
-    console.log(newProductsData);
-
-    setProductsData(newProductsData);
+    setAllProducts(newProductsData);
   }
 
   function decrement(index) {
-    const newProductsData = [...productsData];
+    const newProductsData = [...allProducts];
     if (newProductsData[index].quantity >= 2)
       newProductsData[index].quantity -= 1;
 
-    setProductsData(newProductsData);
+    setAllProducts(newProductsData);
   }
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error</p>;
   return (
     <div className={style.products}>
-      {productsData &&
-        productsData.map((data, index) => {
+      {allProducts &&
+        allProducts.map((data, index) => {
           return (
-            //make quantity get change in real time per product
             <Fragment key={data.id}>
               <Product
                 onChange={(e) => {
                   setProductQuantity(Number(e.target.value), index);
                 }}
                 onClick={() => {
-                  addToCart(productsData[index]);
+                  addToCart(allProducts[index]);
                 }}
                 data={data}
                 increment={() => increment(index)}
