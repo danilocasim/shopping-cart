@@ -1,12 +1,18 @@
 import { describe, it, expect } from "vitest";
 import { RouterProvider, createMemoryRouter } from "react-router";
-import {
-  render,
-  screen,
-  waitForElementToBeRemoved,
-} from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import routes from "../../routes.jsx";
 import { userEvent } from "@testing-library/user-event";
+import { vi } from "vitest";
+import { products } from "../products.js";
+
+vi.mock("../../components/hooks/useStoreAPI.jsx", () => {
+  return {
+    useStoreAPI: vi.fn(() => {
+      return [products, false, false];
+    }),
+  };
+});
 
 describe("Homepage component", () => {
   it("should render correctly", () => {
@@ -33,10 +39,6 @@ describe("Homepage component", () => {
     const shopNowLink = screen.getByRole("link", { name: /Shop Now!/ });
 
     await user.click(shopNowLink);
-
-    await waitForElementToBeRemoved(screen.queryByText("Loading..."), {
-      timeout: 5000,
-    });
 
     expect(screen.getByAltText(/Mens Cotton Jacket/i)).toBeInTheDocument();
   });
