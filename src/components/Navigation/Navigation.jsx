@@ -1,7 +1,8 @@
 import { Link } from "react-router";
 import style from "./Navigation.module.css";
+import { ShoppingCart } from "lucide-react";
 
-const Navigation = () => {
+const Navigation = ({ itemLength }) => {
   return (
     <nav className={style.navigation}>
       <div className='logo'>
@@ -10,8 +11,15 @@ const Navigation = () => {
         </Link>
       </div>
       <div className={style.navItems}>
-        <Link to='/products'>Products</Link>
-        <Link to='/checkout'>Checkout</Link>
+        <Link to='/products'>Collections</Link>
+        <Link
+          data-testid='checkoutLink'
+          className={style.checkout}
+          to='/checkout'
+        >
+          <span>{itemLength}</span>
+          <ShoppingCart />
+        </Link>
       </div>
     </nav>
   );
