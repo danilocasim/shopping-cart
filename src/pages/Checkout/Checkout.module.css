@@ -1,4 +1,23 @@
-.productImage {
-  width: 100px;
-  height: 100px;
+.checkoutWrapper {
+  width: 80vw;
+
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-wrap: wrap;
+  gap: 6rem;
+  margin: 3rem auto;
+}
+
+.checkoutProducts {
+  flex: 2;
+  display: grid;
+  gap: 3rem;
+}
+
+.emptyMessage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
