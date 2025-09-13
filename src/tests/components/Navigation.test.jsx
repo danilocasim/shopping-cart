@@ -28,8 +28,11 @@ describe("Navigation Component", () => {
       screen.getByRole("heading", { name: "Shoplifts" })
     ).toBeInTheDocument();
 
-    expect(screen.getByRole("link", { name: "Products" })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "Checkout" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: "Collections" })
+    ).toBeInTheDocument();
+
+    expect(screen.getByTestId(/checkoutLink/)).toBeInTheDocument();
   });
 
   it("should be clickable, the links", async () => {
@@ -41,8 +44,8 @@ describe("Navigation Component", () => {
 
     render(<RouterProvider router={router}></RouterProvider>);
 
-    const productsLink = screen.getByRole("link", { name: "Products" });
-    const checkoutLinks = screen.getByRole("link", { name: "Checkout" });
+    const productsLink = screen.getByRole("link", { name: "Collections" });
+    const checkoutLinks = screen.getByTestId(/checkoutLink/);
 
     await user.click(productsLink);
 
@@ -51,7 +54,7 @@ describe("Navigation Component", () => {
     await user.click(checkoutLinks);
 
     expect(
-      screen.getByRole("heading", { name: "Checkout" })
+      screen.getByRole("heading", { name: "YOUR CART IS EMPTY" })
     ).toBeInTheDocument();
   });
 });
