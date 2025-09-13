@@ -1,6 +1,8 @@
 import { Fragment } from "react";
 import { useOutletContext } from "react-router";
 import style from "./Checkout.module.css";
+import CheckoutProduct from "../../components/CheckoutProduct/CheckoutProduct";
+import SummaryReport from "../../components/SummaryReport/SummaryReport";
 function Checkout() {
   const [checkoutItems, setCheckoutItems] = useOutletContext();
 
@@ -39,22 +41,26 @@ function Checkout() {
     <Fragment>
       <div className={style.checkoutWrapper}>
         <div className={style.checkoutProducts}>
-      {checkoutItems &&
+          {checkoutItems &&
             checkoutItems.map((item, index) => {
-          return (
-            <Fragment key={item.id}>
+              return (
+                <Fragment key={item.id}>
                   <CheckoutProduct
                     item={item}
                     decrement={() => decrement(index)}
                     increment={() => increment(index)}
                     deleteProduct={() => deleteProduct(index)}
-              />
-              <p>{item.title}</p>
-              <p>{item.quantity}</p>
-            </Fragment>
-          );
-        })}
-    </div>
+                  />
+                </Fragment>
+              );
+            })}
+        </div>
+
+        {checkoutItems.length !== 0 && (
+          <SummaryReport items={checkoutItems} checkout={removeAllProducts} />
+        )}
+      </div>
+    </Fragment>
   );
 }
 
