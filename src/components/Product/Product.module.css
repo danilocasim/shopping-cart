@@ -1,18 +1,50 @@
+@import url(../../styles/reset.css);
+
 .productImage {
-  height: 100px;
-  width: 100px;
+  height: auto;
+  width: 150px;
 }
 .productWrapper {
   display: grid;
-  place-items: center;
+
+  padding: 1.5rem;
+  border: 2px solid black;
+  gap: 0.5rem;
 }
 
 .buttonWrapper {
   display: flex;
-  width: 100px;
+  align-items: center;
+  gap: 1rem;
+}
+
+.description {
+  display: grid;
+
+  gap: 0.5rem;
 }
 
 input {
   width: 30px;
   text-align: center;
+}
+
+.addToCartBtn {
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  border: none;
+  padding: 5px 10px;
+}
+
+.quantityBtn {
+  border: 2px solid black;
+}
+
+.quantityBtn button,
+.quantityBtn input,
+.quantityBtn input:focus {
+  border: none;
+  padding: 3px 5px;
+  outline: none;
 }
