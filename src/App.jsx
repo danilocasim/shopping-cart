@@ -5,10 +5,9 @@ import { useState } from "react";
 export function App() {
   const [checkoutItems, setCheckoutItems] = useState([]);
 
-  console.log(checkoutItems);
   return (
     <div>
-      <Navigation></Navigation>
+      <Navigation itemLength={checkoutItems.length}></Navigation>
       <Outlet context={[checkoutItems, setCheckoutItems]} />
     </div>
   );
