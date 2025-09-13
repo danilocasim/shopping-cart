@@ -25,7 +25,7 @@ function SummaryReport({ items, checkout }) {
       </div>
       <div className={style.row}>
         <p className={style.light}>TOTAL</p>
-        <p>${Number(allProductsTotalPrice) + shippingFee}</p>
+        <p>${Number(allProductsTotalPrice).toFixed(2) + shippingFee}</p>
       </div>
       <Link
         className={style.checkoutBtn}
