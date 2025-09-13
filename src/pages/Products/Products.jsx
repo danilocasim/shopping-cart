@@ -30,13 +30,12 @@ function Products() {
 
       setCheckoutItems(newCheckoutItems);
 
-      return resetProductsQuantity();
+      return;
     }
 
     newCheckoutItems.push(copyData);
 
     setCheckoutItems(newCheckoutItems);
-    resetProductsQuantity();
   }
 
   function setProductQuantity(value, index) {
@@ -45,13 +44,10 @@ function Products() {
     setAllProducts(updatedQuanties);
   }
 
-  function resetProductsQuantity() {
-    const resetProductsQuantity = allProducts.map((product) => ({
-      ...product,
-      quantity: (product.quantity = 1),
-    }));
-
-    setAllProducts(resetProductsQuantity);
+  function resetProductQuantity(index) {
+    const newAllProducts = [...allProducts];
+    newAllProducts[index].quantity = 1;
+    setAllProducts(newAllProducts);
   }
 
   function increment(index) {
@@ -82,6 +78,7 @@ function Products() {
                 }}
                 onClick={() => {
                   addToCart(allProducts[index]);
+                  resetProductQuantity(index);
                 }}
                 data={data}
                 increment={() => increment(index)}
