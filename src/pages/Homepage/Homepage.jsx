@@ -5,23 +5,22 @@ import imageSrc from "../../assets/HomePageHeroImage.png";
 function Homepage() {
   return (
     <div className={style.container}>
-      <h1>Homepage</h1>
       <div className={style.descriptionWrapper}>
+        <h1>Welcome to Shoplifts.</h1>
         <p data-testid='homepageDescription'>
-          Lorem ipsum dolor sit amet consectetur adipiscing elit. Amet
-          consectetur adipiscing elit quisque faucibus ex sapien. Quisque
-          faucibus ex sapien vitae pellentesque sem placerat. Vitae pellentesque
-          sem placerat in id cursus mi.
+          From everyday essentials to unique finds, we bring all kinds of
+          products together in one place. Our goal is to make shopping simple,
+          fun, and affordable for everyone. Whatever you’re looking for, you’ll
+          find it here at Shoplifts.
         </p>
-        <img
-          data-testid='heroImage'
-          src={imageSrc}
-          alt='homepage HomePageHeroImage'
-        />
-        {/* <img style={style.homepagePic} /> */}
+        <Link to='/products'>Shop Now!</Link>
       </div>
 
-      <Link to='/products'>Shop Now!</Link>
+      <img
+        data-testid='heroImage'
+        src={imageSrc}
+        alt='homepage HomePageHeroImage'
+      />
     </div>
   );
 }

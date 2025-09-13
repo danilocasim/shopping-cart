@@ -1,20 +1,44 @@
 @import url(../../styles/reset.css);
 
 .container {
-  display: grid;
-  place-content: center;
-  place-items: center;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: start;
+  align-items: center;
+  height: calc(100vh - 65px);
+  margin: 3rem auto;
+  width: 80vw;
+  gap: 3rem;
 }
 
 .descriptionWrapper {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-.descriptionWrapper > * {
-  flex: 1;
+.descriptionWrapper a {
+  background-color: black;
+  width: 100%;
+  padding: 10px;
+  color: white;
+  text-align: center;
+  font-weight: bold;
 }
-.homepagePic {
-  height: 400px;
+
+@media (min-width: 850px) {
+  .container {
+    flex-direction: row;
+    justify-content: center;
+    margin: 0 auto;
+  }
+
+  .descriptionWrapper {
+    align-items: start;
+  }
+  .container > * {
+    width: 30vw;
+  }
 }
