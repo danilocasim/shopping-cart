@@ -16,10 +16,21 @@
   padding: 7px;
   background-color: black;
   font-weight: bold;
+  border: none;
+  cursor: pointer;
+}
+
+.trackBtn:hover {
+  background-color: white;
+  border: 2px solid black;
 }
 
 .trackBtn a {
   color: white;
+}
+
+.trackBtn:hover a {
+  color: black;
 }
 
 @media (max-width: 505px) {

@@ -19,7 +19,7 @@ function CheckoutProduct({ item, decrement, increment, deleteProduct }) {
             onClick={deleteProduct}
             className={style.delete}
           >
-            X
+            x
           </button>
         </div>
         <div className={style.buttonWrapper}>

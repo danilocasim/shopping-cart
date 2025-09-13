@@ -17,7 +17,7 @@ const Navigation = ({ itemLength }) => {
           className={style.checkout}
           to='/checkout'
         >
-          <span>{itemLength}</span>
+          <span>{itemLength !== 0 ? itemLength : null}</span>
           <ShoppingCart />
         </Link>
       </div>
