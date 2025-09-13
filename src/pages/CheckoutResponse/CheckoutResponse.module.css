@@ -1,0 +1,29 @@
+.wrapper {
+  display: grid;
+  gap: 1rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.logo {
+  font-size: 3rem;
+}
+
+.trackBtn {
+  padding: 7px;
+  background-color: black;
+  font-weight: bold;
+}
+
+.trackBtn a {
+  color: white;
+}
+
+@media (max-width: 505px) {
+  .wrapper {
+    width: 80vw;
+  }
+}
