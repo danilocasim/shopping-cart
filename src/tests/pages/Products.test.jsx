@@ -40,11 +40,11 @@ describe("Product page component", () => {
 
     await user.click(addToCartBtn);
 
-    const checkoutLink = screen.getByRole("link", { name: "Checkout" });
+    const checkoutLink = screen.getByTestId(/checkoutLink/);
 
     await user.click(checkoutLink);
 
-    expect(screen.getByText(/Mens Cotton Jacket/)).toBeInTheDocument();
+    expect(screen.getByAltText(/Mens Cotton Jacket/)).toBeInTheDocument();
   });
 
   it("should increase the quantity when the product already exist in checkout", async () => {
@@ -61,11 +61,11 @@ describe("Product page component", () => {
 
     await user.click(addToCartBtn);
 
-    const checkoutLink = screen.getByRole("link", { name: "Checkout" });
+    const checkoutLink = screen.getByTestId(/checkoutLink/);
 
     await user.click(checkoutLink);
 
-    expect(screen.getByText(2)).toBeInTheDocument();
+    expect(screen.getByDisplayValue(2)).toBeInTheDocument();
   });
 
   it("should display quantity default value 1", async () => {
@@ -118,10 +118,10 @@ describe("Product page component", () => {
 
     await user.click(addToCartBtn);
 
-    const checkoutLink = screen.getByRole("link", { name: "Checkout" });
+    const checkoutLink = screen.getByTestId(/checkoutLink/);
 
     await user.click(checkoutLink);
 
-    expect(screen.getByText("3")).toBeInTheDocument();
+    expect(screen.getByDisplayValue("3")).toBeInTheDocument();
   });
 });
